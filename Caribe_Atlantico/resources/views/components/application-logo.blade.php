@@ -1,0 +1,1 @@
+<img src="{{ asset('images/Logo-Caribe-negro.png') }}" alt="Caribe Atlántico" {{ $attributes->merge(['class' => 'h-16 w-auto mx-auto']) }}>
