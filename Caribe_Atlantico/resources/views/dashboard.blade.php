@@ -1,39 +1,39 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             <div>
-                <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-caribe-redLight text-caribe-red text-[11px] font-bold tracking-wider uppercase mb-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-caribe-red"></span>
-                    Panel de Control Vehicular
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-caribe-red/20 border border-caribe-red/40 text-caribe-redLight text-xs font-bold uppercase tracking-wider mb-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-caribe-red animate-pulse"></span>
+                    Panel de Monitoreo Vehicular
                 </div>
-                <h1 class="text-2xl font-black text-slate-900 tracking-tight">
+                <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
                     Hola, {{ Auth::user()->name }} 👋
                 </h1>
-                <p class="text-xs sm:text-sm text-slate-500">
-                    Monitoreo en tiempo real, alertas de mantenimiento preventivo y citas en Multiservicios Caribe Atlántico.
+                <p class="text-xs sm:text-sm text-slate-300 mt-1">
+                    Control biométrico de tu auto, alertas preventivas y citas en Multiservicios Caribe Atlántico.
                 </p>
             </div>
 
-            <!-- Botones de Acción Rápida -->
-            <div class="flex items-center gap-2">
-                <a href="#agendar-cita" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-caribe-red hover:bg-caribe-darkRed text-white text-xs font-bold shadow-md shadow-caribe-red/20 transition-all">
+            <!-- Botones Rápidos -->
+            <div class="flex items-center gap-3">
+                <a href="#agendar-cita" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-caribe-red hover:bg-caribe-darkRed text-white text-xs font-extrabold shadow-lg shadow-caribe-red/30 transition transform hover:-translate-y-0.5">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
                     <span>Agendar Cita en Taller</span>
                 </a>
 
-                <a href="#tarjeta-vida" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold shadow-xs transition-all">
-                    <svg class="w-4 h-4 text-caribe-blueAtlantic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="#tarjeta-vida" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-bold transition">
+                    <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    <span>Ver Ficha Vehicular</span>
+                    <span>Ver Ficha</span>
                 </a>
             </div>
         </div>
     </x-slot>
 
-    <div class="py-8" x-data="{ 
+    <div class="py-12" x-data="{ 
         odometro: 78750, 
         nuevoKm: '',
         actualizarKm() {
@@ -43,348 +43,319 @@
                 alert('¡Kilometraje actualizado correctamente en tu Tarjeta de Vida Vehicular!');
             }
         },
-        citaEnviada: false,
         citaServicio: 'Mantenimiento Preventivo Integral',
         citaFecha: '{{ date('Y-m-d', strtotime('+2 days')) }}',
         citaTurno: 'Mañana (8:00 AM - 12:00 PM)',
         citaNotas: '',
+        citaEnviada: false,
         agendar() {
             this.citaEnviada = true;
         }
     }">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 space-y-12 sm:space-y-16">
 
-            <!-- Fila de Métricas Principales (KPIs) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                <!-- Métrica 1: Salud Vehicular -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-md transition-all">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Salud del Vehículo</span>
-                        <span class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs border border-emerald-100">
+            <!-- FILA DE MÉTRICAS / KPIS CON ALTA PRESENCIA DE COLOR -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- KPI 1: Salud Vehicular (Azul con Verde Neón) -->
+                <div class="p-6 rounded-3xl bg-gradient-to-br from-[#0B2545] to-[#07162C] border border-emerald-500/30 shadow-xl relative overflow-hidden group">
+                    <div class="absolute -right-8 -top-8 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Salud General</span>
+                        <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-black">
                             94%
                         </span>
                     </div>
-                    <div class="text-2xl font-black text-slate-900">Estado Óptimo</div>
-                    <p class="text-xs text-slate-500 mt-1">Toyota Corolla 2018 • Placa AB123CD</p>
-                    <div class="w-full bg-slate-100 rounded-full h-1.5 mt-3 overflow-hidden">
-                        <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 94%"></div>
+                    <div class="text-2xl font-black text-white">Estado Óptimo</div>
+                    <p class="text-xs text-slate-400 mt-1">Toyota Corolla • AB123CD</p>
+                    <div class="w-full bg-slate-800 rounded-full h-2 mt-4 overflow-hidden border border-white/5">
+                        <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-2 rounded-full" style="width: 94%"></div>
                     </div>
                 </div>
 
-                <!-- Métrica 2: Próximo Mantenimiento Preventivo -->
-                <div class="bg-white p-5 rounded-2xl border border-caribe-red/30 shadow-xs hover:shadow-md transition-all relative overflow-hidden">
-                    <div class="absolute -right-6 -bottom-6 w-20 h-20 bg-caribe-red/5 rounded-full pointer-events-none"></div>
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-bold uppercase tracking-wider text-caribe-red">Alerta Preventiva</span>
-                        <span class="px-2 py-0.5 rounded-md bg-caribe-redLight text-caribe-red text-[11px] font-bold">
-                            Pronto
+                <!-- KPI 2: Alerta Preventiva (Rojo Caribe con Glow) -->
+                <div class="p-6 rounded-3xl bg-gradient-to-br from-[#2D0B0E] via-[#1D0608] to-[#0A192F] border border-red-500/40 shadow-xl relative overflow-hidden group">
+                    <div class="absolute -right-8 -top-8 w-24 h-24 bg-caribe-red/20 rounded-full blur-2xl group-hover:bg-caribe-red/30 transition-all"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-bold uppercase tracking-wider text-red-300">Alerta Preventiva</span>
+                        <span class="px-2.5 py-1 rounded-full bg-red-500/30 text-red-200 border border-red-500/40 text-[10px] font-black uppercase tracking-wider">
+                            ¡Próximo!
                         </span>
                     </div>
-                    <div class="text-2xl font-black text-caribe-red">En 1,250 km</div>
-                    <p class="text-xs text-slate-600 mt-1">Cambio de Aceite 10W-30 & Filtro</p>
-                    <div class="w-full bg-slate-100 rounded-full h-1.5 mt-3 overflow-hidden">
-                        <div class="bg-caribe-red h-1.5 rounded-full" style="width: 82%"></div>
+                    <div class="text-2xl font-black text-white">En 1,250 km</div>
+                    <p class="text-xs text-red-200 mt-1">Aceite 10W-30 & Filtro Sellado</p>
+                    <div class="w-full bg-slate-800 rounded-full h-2 mt-4 overflow-hidden border border-white/5">
+                        <div class="bg-gradient-to-r from-amber-500 to-caribe-red h-2 rounded-full" style="width: 82%"></div>
                     </div>
                 </div>
 
-                <!-- Métrica 3: Citas en Taller -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-md transition-all">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Cita Agendada</span>
-                        <span class="w-8 h-8 rounded-xl bg-sky-50 text-caribe-blueAtlantic flex items-center justify-center border border-sky-100">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
+                <!-- KPI 3: Cita en Taller (Azul Atlántico) -->
+                <div class="p-6 rounded-3xl bg-gradient-to-br from-[#06203D] to-[#0A192F] border border-sky-500/40 shadow-xl relative overflow-hidden group">
+                    <div class="absolute -right-8 -top-8 w-24 h-24 bg-sky-500/15 rounded-full blur-2xl group-hover:bg-sky-500/25 transition-all"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Cita Programada</span>
+                        <span class="w-8 h-8 rounded-xl bg-sky-500/20 text-sky-300 flex items-center justify-center font-bold text-xs border border-sky-500/30">
+                            📅
                         </span>
                     </div>
-                    <div class="text-2xl font-black text-slate-900">Jueves, 10:00 AM</div>
-                    <p class="text-xs text-caribe-blueNavy font-medium mt-1">Revisión Preventiva & Frenos</p>
-                    <div class="mt-3 flex items-center gap-1.5 text-[11px] text-emerald-600 font-semibold">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    <div class="text-2xl font-black text-white">Jueves, 10:00 AM</div>
+                    <p class="text-xs text-sky-200 mt-1">Mantenimiento Preventivo & Frenos</p>
+                    <div class="mt-4 flex items-center gap-2 text-[11px] text-emerald-400 font-bold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         Turno Confirmado en Recinto
                     </div>
                 </div>
 
-                <!-- Métrica 4: Historial en Recinto -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-md transition-all">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Servicios Realizados</span>
-                        <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs">
+                <!-- KPI 4: Historial en Recinto (Azul Noche) -->
+                <div class="p-6 rounded-3xl bg-gradient-to-br from-[#0F1E36] to-[#07162C] border border-slate-700 shadow-xl relative overflow-hidden group">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Servicios en Taller</span>
+                        <span class="w-8 h-8 rounded-xl bg-white/10 text-white flex items-center justify-center font-bold text-xs">
                             6
                         </span>
                     </div>
-                    <div class="text-2xl font-black text-slate-900">100% Garantía</div>
-                    <p class="text-xs text-slate-500 mt-1">Fluidos & Repuestos Originales</p>
-                    <div class="mt-3 text-[11px] text-caribe-blueAtlantic font-semibold flex items-center gap-1">
-                        <span>Ver historial de facturas</span>
-                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="text-2xl font-black text-white">100% Garantía</div>
+                    <p class="text-xs text-slate-400 mt-1">Repuestos & Mano de Obra</p>
+                    <div class="mt-4 text-[11px] text-sky-400 font-bold flex items-center gap-1.5">
+                        <span>Historial verificado en sistema</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                     </div>
                 </div>
+
             </div>
 
-            <!-- SECCIÓN DESTACADA: TARJETA DE VIDA VEHICULAR PERSONALIZADA -->
-            <div id="tarjeta-vida" class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
-                <!-- Header de la Ficha / Pasaporte -->
-                <div class="bg-gradient-to-r from-caribe-blueDeep via-caribe-blue to-caribe-blueNavy p-6 sm:p-8 text-white relative">
+            <!-- SECCIÓN: TARJETA DE VIDA VEHICULAR PERSONALIZADA -->
+            <div id="tarjeta-vida" class="bg-gradient-to-br from-[#0A192F] via-[#0D223E] to-[#07162C] rounded-3xl border border-slate-700 shadow-2xl overflow-hidden">
+                
+                <!-- Encabezado de la Ficha / Pasaporte -->
+                <div class="p-8 sm:p-10 border-b border-white/10 relative overflow-hidden">
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
                         <div>
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold text-white/90 border border-white/10 mb-3">
-                                <span class="w-2 h-2 rounded-full bg-caribe-red animate-pulse"></span>
-                                Pasaporte Automotriz Digital Oficial
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-caribe-blueAtlantic/20 text-sky-300 border border-caribe-blueAtlantic/30 text-xs font-bold uppercase tracking-wider mb-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+                                Pasaporte Automotriz Digital
                             </div>
-                            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-white">
+                            <h2 class="text-2xl sm:text-3xl font-black text-white">
                                 Tarjeta de Vida Vehicular
                             </h2>
                             <p class="text-xs sm:text-sm text-slate-300 mt-1">
-                                Registro biométrico del desgaste mecánico y cronograma de mantenimiento preventivo.
+                                Seguimiento biométrico del desgaste mecánico en San Juan Bautista, Margarita.
                             </p>
                         </div>
 
                         <!-- Badge del Vehículo Vinculado -->
-                        <div class="bg-white/10 backdrop-blur-md border border-white/15 p-4 rounded-2xl flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-caribe-red flex items-center justify-center text-white font-black text-lg shadow-inner">
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-caribe-red text-white flex items-center justify-center font-black text-lg shadow-lg">
                                 🚗
                             </div>
                             <div>
-                                <div class="text-xs text-slate-300 font-medium">Vehículo Principal</div>
+                                <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Unidad Vinculada</div>
                                 <div class="text-base font-black text-white">Toyota Corolla GLi 1.8L</div>
-                                <div class="flex items-center gap-3 text-xs mt-0.5">
-                                    <span class="px-2 py-0.5 rounded bg-white text-slate-900 font-mono font-bold">PLACA: AB123CD</span>
-                                    <span class="text-slate-300">Año: 2018</span>
+                                <div class="flex items-center gap-2.5 text-xs mt-1">
+                                    <span class="px-2 py-0.5 rounded bg-white text-slate-900 font-mono font-bold text-[10px]">PLACA: AB123CD</span>
+                                    <span class="text-slate-400 text-[11px]">Año: 2018</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Datos Rápidos de Odómetro -->
-                    <div class="mt-6 pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+                    <div class="mt-8 pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-6 text-xs">
                         <div>
                             <span class="text-slate-400 block font-medium">Odómetro Actual:</span>
-                            <span class="text-base font-black text-white" x-text="odometro.toLocaleString() + ' km'">78,750 km</span>
+                            <span class="text-lg font-mono font-black text-white" x-text="odometro.toLocaleString() + ' km'">78,750 km</span>
                         </div>
                         <div>
-                            <span class="text-slate-400 block font-medium">Último Servicio en Taller:</span>
-                            <span class="text-sm font-bold text-white">75,000 km (Hace 3 meses)</span>
+                            <span class="text-slate-400 block font-medium">Último Servicio en Recinto:</span>
+                            <span class="text-sm font-bold text-slate-200">75,000 km</span>
                         </div>
                         <div>
                             <span class="text-slate-400 block font-medium">Próximo Cambio de Aceite:</span>
                             <span class="text-sm font-bold text-caribe-redLight">80,000 km</span>
                         </div>
                         <div>
-                            <span class="text-slate-400 block font-medium">Técnico Certificado:</span>
+                            <span class="text-slate-400 block font-medium">Técnico Asignado:</span>
                             <span class="text-sm font-bold text-white">Ing. Taller Caribe</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Cuerpo de la Tarjeta de Vida: Semáforo y Barras de Desgaste -->
-                <div class="p-6 sm:p-8 space-y-6">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <!-- Cuerpo de la Tarjeta: 6 Componentes Clave con Colores Vivos -->
+                <div class="p-8 sm:p-10 space-y-8">
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
-                            <h3 class="text-lg font-black text-slate-900">Estado Preventivo de Componentes Críticos</h3>
-                            <p class="text-xs text-slate-500">Estimación basada en kilometraje, tiempo de uso y condiciones de manejo en Margarita.</p>
+                            <h3 class="text-lg font-black text-white">Estado de Salud Preventivo</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Semáforo de vida útil de consumibles y piezas clave.</p>
                         </div>
+
                         <!-- Actualizador de Km -->
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2.5">
                             <input type="number" 
                                    x-model="nuevoKm" 
                                    placeholder="Nuevo kilometraje..." 
-                                   class="text-xs py-1.5 px-3 border border-slate-300 rounded-lg w-36 focus:ring-1 focus:ring-caribe-blueAtlantic" />
+                                   class="text-xs py-2 px-3.5 bg-slate-900 border border-slate-700 text-white rounded-xl w-40 focus:ring-1 focus:ring-sky-400 outline-none" />
                             <button @click="actualizarKm()" 
-                                    class="text-xs font-bold px-3 py-1.5 bg-slate-800 hover:bg-slate-900 text-white rounded-lg transition">
+                                    class="text-xs font-bold px-4 py-2 bg-caribe-red hover:bg-caribe-darkRed text-white rounded-xl transition shadow">
                                 Actualizar
                             </button>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                        <!-- Componente 1: Aceite de Motor -->
-                        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-caribe-red/40 transition-all">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-8 h-8 rounded-lg bg-red-100 text-caribe-red flex items-center justify-center font-bold text-sm">🛢️</span>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-slate-800">Aceite de Motor (10W-30)</h4>
-                                        <p class="text-[11px] text-slate-500">Semi-Sintético • Filtro Sellado</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs font-bold text-caribe-red">82% Vida</span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        
+                        <!-- 1: Aceite -->
+                        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-white flex items-center gap-2">🛢️ Aceite Semi-Sintético</span>
+                                <span class="text-xs font-black text-caribe-red">82% Vida</span>
                             </div>
-                            <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden my-2">
-                                <div class="bg-caribe-red h-2 rounded-full" style="width: 82%"></div>
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                <div class="bg-gradient-to-r from-amber-500 to-caribe-red h-2 rounded-full" style="width: 82%"></div>
                             </div>
-                            <div class="flex items-center justify-between text-[11px] text-slate-600">
+                            <div class="flex justify-between text-[11px] text-slate-400">
                                 <span>Restan: ~1,250 km</span>
-                                <span class="font-semibold text-caribe-red">Mantenimiento próximo</span>
+                                <span class="text-caribe-red font-bold">Cambio próximo</span>
                             </div>
                         </div>
 
-                        <!-- Componente 2: Sistema de Frenos -->
-                        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-caribe-blueAtlantic/40 transition-all">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-8 h-8 rounded-lg bg-sky-100 text-caribe-blueAtlantic flex items-center justify-center font-bold text-sm">🛑</span>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-slate-800">Pastillas & Discos de Freno</h4>
-                                        <p class="text-[11px] text-slate-500">Grosor de pasta: 7.5 mm</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs font-bold text-caribe-blueAtlantic">65% Vida</span>
+                        <!-- 2: Frenos -->
+                        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-white flex items-center gap-2">🛑 Pastillas Cerámicas</span>
+                                <span class="text-xs font-black text-sky-400">65% Vida</span>
                             </div>
-                            <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden my-2">
-                                <div class="bg-caribe-blueAtlantic h-2 rounded-full" style="width: 65%"></div>
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                <div class="bg-gradient-to-r from-sky-500 to-caribe-blueAtlantic h-2 rounded-full" style="width: 65%"></div>
                             </div>
-                            <div class="flex items-center justify-between text-[11px] text-slate-600">
+                            <div class="flex justify-between text-[11px] text-slate-400">
                                 <span>Restan: ~6,500 km</span>
-                                <span class="font-semibold text-emerald-600">Condición segura</span>
+                                <span class="text-emerald-400 font-bold">Seguro</span>
                             </div>
                         </div>
 
-                        <!-- Componente 3: Refrigerante -->
-                        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-emerald-300 transition-all">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">❄️</span>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-slate-800">Líquido Refrigerante</h4>
-                                        <p class="text-[11px] text-slate-500">Coolant 50/50 Orgánico</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs font-bold text-emerald-600">90% Vida</span>
+                        <!-- 3: Refrigerante -->
+                        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-white flex items-center gap-2">❄️ Coolant Orgánico</span>
+                                <span class="text-xs font-black text-emerald-400">90% Vida</span>
                             </div>
-                            <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden my-2">
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
                                 <div class="bg-emerald-500 h-2 rounded-full" style="width: 90%"></div>
                             </div>
-                            <div class="flex items-center justify-between text-[11px] text-slate-600">
-                                <span>Nivel óptimo</span>
-                                <span class="font-semibold text-emerald-600">Excelente</span>
+                            <div class="flex justify-between text-[11px] text-slate-400">
+                                <span>Densidad óptima</span>
+                                <span class="text-emerald-400 font-bold">Excelente</span>
                             </div>
                         </div>
 
-                        <!-- Componente 4: Alineación y Balanceo -->
-                        <div class="p-4 rounded-2xl border border-amber-200 bg-amber-50/30 hover:bg-white transition-all">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-sm">🔄</span>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-slate-800">Alineación & Rotación</h4>
-                                        <p class="text-[11px] text-slate-500">Tren delantero y balanceo</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs font-bold text-amber-600">35% Vida</span>
+                        <!-- 4: Alineación -->
+                        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-white flex items-center gap-2">🔄 Alineación & Rotación</span>
+                                <span class="text-xs font-black text-amber-400">35% Vida</span>
                             </div>
-                            <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden my-2">
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
                                 <div class="bg-amber-500 h-2 rounded-full" style="width: 35%"></div>
                             </div>
-                            <div class="flex items-center justify-between text-[11px] text-slate-600">
+                            <div class="flex justify-between text-[11px] text-slate-400">
                                 <span>Restan: ~800 km</span>
-                                <span class="font-semibold text-amber-600">Agendar chequeo</span>
+                                <span class="text-amber-400 font-bold">Alerta preventiva</span>
                             </div>
                         </div>
 
-                        <!-- Componente 5: Batería y Sistema Eléctrico -->
-                        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-white transition-all">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">⚡</span>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-slate-800">Batería & Alternador</h4>
-                                        <p class="text-[11px] text-slate-500">12.6V Reposo • 14.1V Carga</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs font-bold text-blue-600">92% Salud</span>
+                        <!-- 5: Batería -->
+                        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-white flex items-center gap-2">⚡ Batería & Alternador</span>
+                                <span class="text-xs font-black text-sky-400">92% Salud</span>
                             </div>
-                            <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden my-2">
-                                <div class="bg-blue-600 h-2 rounded-full" style="width: 92%"></div>
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                <div class="bg-sky-500 h-2 rounded-full" style="width: 92%"></div>
                             </div>
-                            <div class="flex items-center justify-between text-[11px] text-slate-600">
-                                <span>Excelente arranque</span>
-                                <span class="font-semibold text-emerald-600">Al día</span>
+                            <div class="flex justify-between text-[11px] text-slate-400">
+                                <span>12.6V en reposo</span>
+                                <span class="text-emerald-400 font-bold">Al día</span>
                             </div>
                         </div>
 
-                        <!-- Componente 6: Filtros de Aire & Cabina -->
-                        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-white transition-all">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-8 h-8 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-sm">💨</span>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-slate-800">Filtros de Aire y Cabina</h4>
-                                        <p class="text-[11px] text-slate-500">Admisión limpia de motor</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs font-bold text-teal-600">78% Vida</span>
+                        <!-- 6: Filtros -->
+                        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-white flex items-center gap-2">💨 Filtro de Aire y Cabina</span>
+                                <span class="text-xs font-black text-teal-400">78% Vida</span>
                             </div>
-                            <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden my-2">
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
                                 <div class="bg-teal-500 h-2 rounded-full" style="width: 78%"></div>
                             </div>
-                            <div class="flex items-center justify-between text-[11px] text-slate-600">
-                                <span>Restan: ~4,200 km</span>
-                                <span class="font-semibold text-emerald-600">Normal</span>
+                            <div class="flex justify-between text-[11px] text-slate-400">
+                                <span>Flujo limpio</span>
+                                <span class="text-emerald-400 font-bold">Normal</span>
                             </div>
                         </div>
+
                     </div>
 
-                    <!-- Diagnóstico Técnico Profesional -->
-                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <!-- Diagnóstico Directo del Taller -->
+                    <div class="p-5 rounded-2xl bg-[#050E1D] border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-caribe-blueNavy text-white flex items-center justify-center shrink-0 font-black text-xs">
-                                i
+                            <div class="w-8 h-8 rounded-full bg-caribe-red text-white flex items-center justify-center shrink-0 font-black text-xs">
+                                CA
                             </div>
                             <div>
-                                <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Recomendación Preventiva de Taller Caribe</h5>
-                                <p class="text-xs text-slate-600 mt-0.5">
-                                    "Tu Toyota Corolla tiene un rendimiento excelente. Sugerimos agendar en las próximas 2 semanas la alineación y rotación preventiva para asegurar un desgaste parejo de neumáticos y agendar el cambio de aceite preventivo a los 80,000 km."
+                                <h5 class="text-xs font-bold text-white uppercase tracking-wider">Recomendación del Taller Caribe</h5>
+                                <p class="text-xs text-slate-300 mt-1">
+                                    "Tu Toyota Corolla se mantiene en excelente condición. Te recomendamos realizar la rotación y balanceo en tu próxima visita para prolongar la vida útil de tus neumáticos en las vías de Margarita."
                                 </p>
                             </div>
                         </div>
-                        <a href="#agendar-cita" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-caribe-blueNavy hover:bg-caribe-blue text-white text-xs font-bold shrink-0 transition">
-                            <span>Agendar Servicio Recomendado</span>
+                        <a href="#agendar-cita" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-caribe-red hover:bg-caribe-darkRed text-white text-xs font-bold shrink-0 transition">
+                            <span>Agendar Servicio Sugerido</span>
                         </a>
                     </div>
+
                 </div>
+
             </div>
 
-            <!-- SECCIÓN: AGENDAR CITA EN EL TALLER MECÁNICO -->
-            <div id="agendar-cita" class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
-                <div class="max-w-3xl mb-6">
-                    <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-caribe-redLight text-caribe-red text-[11px] font-bold tracking-wider uppercase mb-2">
+            <!-- SECCIÓN: AGENDAR CITA EN EL TALLER (SEGMENTADO Y DINÁMICO) -->
+            <div id="agendar-cita" class="bg-gradient-to-br from-[#0A192F] to-[#0E2442] rounded-3xl border border-slate-700 p-8 sm:p-10 shadow-2xl">
+                
+                <div class="max-w-3xl mb-8">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-caribe-red/20 text-caribe-redLight border border-caribe-red/40 text-xs font-bold uppercase tracking-wider mb-3">
                         <span class="w-1.5 h-1.5 rounded-full bg-caribe-red"></span>
                         Reserva Online Prioritaria
                     </div>
-                    <h3 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                    <h3 class="text-2xl sm:text-3xl font-black text-white">
                         Agendar Cita en el Taller Mecánico
                     </h3>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-1">
-                        Selecciona el servicio que requiere tu vehículo. Recibirás confirmación técnica y asignación de puesto en nuestro taller en San Juan Bautista.
+                    <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                        Elige el servicio y turno que más te convenga. Asignamos técnico y fosa previo a tu llegada.
                     </p>
                 </div>
 
-                <!-- Mensaje de Cita Agendada Exitosamente -->
+                <!-- Confirmación de Cita -->
                 <div x-show="citaEnviada" 
                      x-transition 
-                     class="mb-6 p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900">
+                     class="p-6 rounded-2xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-200 mb-8">
                     <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0 font-bold text-lg">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-black text-lg shrink-0">
                             ✓
                         </div>
                         <div class="flex-1">
-                            <h4 class="text-base font-bold text-emerald-900">¡Cita Solicitada con Éxito en Caribe Atlántico!</h4>
-                            <p class="text-xs text-emerald-800 mt-1">
-                                Tu solicitud para <strong x-text="citaServicio"></strong> el día <strong x-text="citaFecha"></strong> (<span x-text="citaTurno"></span>) ha sido registrada con el código <strong>#CITA-2026-8842</strong>.
+                            <h4 class="text-base font-bold text-white">¡Cita Registrada con Éxito en Caribe Atlántico!</h4>
+                            <p class="text-xs text-emerald-300 mt-1">
+                                Solicitud para <strong x-text="citaServicio"></strong> el día <strong x-text="citaFecha"></strong> (<span x-text="citaTurno"></span>) con código <strong>#CITA-2026-8842</strong>.
                             </p>
-                            <div class="mt-4 flex flex-wrap items-center gap-3">
-                                <a :href="'https://wa.me/584122050350?text=' + encodeURIComponent('Hola Multiservicios Caribe Atlántico, he agendado una cita para mi vehículo Toyota Corolla AB123CD para el servicio de: ' + citaServicio + ' el día ' + citaFecha + '. Código: #CITA-2026-8842')" 
+                            <div class="mt-4 flex flex-wrap items-center gap-4">
+                                <a :href="'https://wa.me/584122050350?text=' + encodeURIComponent('Hola Multiservicios Caribe Atlántico, he reservado una cita para mi Toyota Corolla AB123CD para el servicio de: ' + citaServicio + ' el día ' + citaFecha + ' (' + citaTurno + '). Código: #CITA-2026-8842')" 
                                    target="_blank" 
-                                   class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition">
-                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.674zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
-                                    </svg>
-                                    <span>Confirmar Inmediato por WhatsApp</span>
+                                   class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow transition">
+                                    <span>Confirmar por WhatsApp Inmediato</span>
                                 </a>
-                                <button @click="citaEnviada = false" class="text-xs font-semibold text-slate-600 hover:text-slate-900 underline">
+                                <button @click="citaEnviada = false" class="text-xs font-semibold text-slate-400 hover:text-white underline">
                                     Agendar otra cita
                                 </button>
                             </div>
@@ -392,204 +363,175 @@
                     </div>
                 </div>
 
-                <!-- Formulario de Agendamiento -->
-                <form @submit.prevent="agendar()" x-show="!citaEnviada" class="space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                        <!-- Servicio -->
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                                Tipo de Servicio en Taller
-                            </label>
-                            <select x-model="citaServicio" class="w-full text-xs font-semibold py-2.5 px-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-caribe-blueAtlantic focus:ring-2 focus:ring-caribe-blueAtlantic/20 outline-none">
-                                <option value="Mantenimiento Preventivo Integral">🛠️ Mantenimiento Preventivo Integral</option>
-                                <option value="Cambio de Aceite y Filtro Express">🛢️ Cambio de Aceite y Filtro Express</option>
-                                <option value="Diagnóstico Computarizado por Escáner">💻 Diagnóstico Computarizado por Escáner</option>
-                                <option value="Revisión y Cambio de Frenos">🛑 Revisión y Cambio de Frenos</option>
-                                <option value="Alineación, Balanceo y Tren Delantero">🔄 Alineación, Balanceo y Tren Delantero</option>
-                                <option value="Mantenimiento de Aire Acondicionado">❄️ Mantenimiento de Aire Acondicionado</option>
-                                <option value="Mecánica General de Motor y Caja">⚙️ Mecánica General de Motor y Caja</option>
-                            </select>
-                        </div>
+                <form @submit.prevent="agendar()" x-show="!citaEnviada" class="space-y-8">
+                    
+                    <!-- Selección de Servicio con Chips -->
+                    <div>
+                        <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-300 mb-3">
+                            Selecciona el Tipo de Servicio
+                        </label>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                            <button type="button" 
+                                    @click="citaServicio = 'Mantenimiento Preventivo Integral'"
+                                    :class="citaServicio === 'Mantenimiento Preventivo Integral' ? 'bg-caribe-red text-white border-caribe-red' : 'bg-white/5 text-slate-300 border-white/10 hover:bg-white/10'"
+                                    class="p-3.5 rounded-xl border text-left font-bold transition flex items-center gap-2 cursor-pointer">
+                                <span>🛠️</span>
+                                <span>Preventivo Integral</span>
+                            </button>
 
-                        <!-- Fecha -->
+                            <button type="button" 
+                                    @click="citaServicio = 'Cambio de Aceite y Filtro Express'"
+                                    :class="citaServicio === 'Cambio de Aceite y Filtro Express' ? 'bg-caribe-blueAtlantic text-white border-sky-400' : 'bg-white/5 text-slate-300 border-white/10 hover:bg-white/10'"
+                                    class="p-3.5 rounded-xl border text-left font-bold transition flex items-center gap-2 cursor-pointer">
+                                <span>🛢️</span>
+                                <span>Aceite & Filtro Express</span>
+                            </button>
+
+                            <button type="button" 
+                                    @click="citaServicio = 'Diagnóstico Computarizado por Escáner'"
+                                    :class="citaServicio === 'Diagnóstico Computarizado por Escáner' ? 'bg-indigo-600 text-white border-indigo-400' : 'bg-white/5 text-slate-300 border-white/10 hover:bg-white/10'"
+                                    class="p-3.5 rounded-xl border text-left font-bold transition flex items-center gap-2 cursor-pointer">
+                                <span>💻</span>
+                                <span>Escáner / Check Engine</span>
+                            </button>
+
+                            <button type="button" 
+                                    @click="citaServicio = 'Revisión y Cambio de Frenos'"
+                                    :class="citaServicio === 'Revisión y Cambio de Frenos' ? 'bg-amber-600 text-white border-amber-400' : 'bg-white/5 text-slate-300 border-white/10 hover:bg-white/10'"
+                                    class="p-3.5 rounded-xl border text-left font-bold transition flex items-center gap-2 cursor-pointer">
+                                <span>🛑</span>
+                                <span>Frenos & Tren Delantero</span>
+                            </button>
+
+                            <button type="button" 
+                                    @click="citaServicio = 'Alineación, Balanceo y Tren Delantero'"
+                                    :class="citaServicio === 'Alineación, Balanceo y Tren Delantero' ? 'bg-emerald-600 text-white border-emerald-400' : 'bg-white/5 text-slate-300 border-white/10 hover:bg-white/10'"
+                                    class="p-3.5 rounded-xl border text-left font-bold transition flex items-center gap-2 cursor-pointer">
+                                <span>🔄</span>
+                                <span>Alineación & Balanceo</span>
+                            </button>
+
+                            <button type="button" 
+                                    @click="citaServicio = 'Mantenimiento de Aire Acondicionado'"
+                                    :class="citaServicio === 'Mantenimiento de Aire Acondicionado' ? 'bg-rose-600 text-white border-rose-400' : 'bg-white/5 text-slate-300 border-white/10 hover:bg-white/10'"
+                                    class="p-3.5 rounded-xl border text-left font-bold transition flex items-center gap-2 cursor-pointer">
+                                <span>❄️</span>
+                                <span>Aire Acondicionado</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Fecha, Turno y Vehículo -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                                Fecha Deseada
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                                Fecha de Visita
                             </label>
                             <input type="date" 
                                    x-model="citaFecha" 
                                    required 
-                                   class="w-full text-xs font-semibold py-2.5 px-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-caribe-blueAtlantic focus:ring-2 focus:ring-caribe-blueAtlantic/20 outline-none" />
+                                   class="w-full py-3 px-4 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs font-semibold focus:border-sky-400 outline-none" />
                         </div>
 
-                        <!-- Turno -->
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                                Turno de Atención
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                                Turno Preferido
                             </label>
-                            <select x-model="citaTurno" class="w-full text-xs font-semibold py-2.5 px-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-caribe-blueAtlantic focus:ring-2 focus:ring-caribe-blueAtlantic/20 outline-none">
+                            <select x-model="citaTurno" class="w-full py-3 px-4 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs font-semibold focus:border-sky-400 outline-none">
                                 <option value="Mañana (8:00 AM - 12:00 PM)">Mañana (8:00 AM - 12:00 PM)</option>
                                 <option value="Tarde (1:00 PM - 5:00 PM)">Tarde (1:00 PM - 5:00 PM)</option>
                             </select>
                         </div>
-                    </div>
 
-                    <!-- Vehículo Seleccionado y Notas -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                                Vehículo a Ingresar
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                                Vehículo Registrado
                             </label>
                             <input type="text" 
-                                   value="Toyota Corolla GLi 2018 (Placa: AB123CD)" 
+                                   value="Toyota Corolla GLi (AB123CD)" 
                                    readonly 
-                                   class="w-full text-xs font-bold text-slate-700 py-2.5 px-3 bg-slate-100 border border-slate-200 rounded-xl cursor-not-allowed" />
-                        </div>
-
-                        <div class="sm:col-span-2">
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                                Síntomas o Solicitud Específica (Opcional)
-                            </label>
-                            <input type="text" 
-                                   x-model="citaNotas" 
-                                   placeholder="Ej. Siento leve vibración al frenar o deseo cambio de aceite sintético..." 
-                                   class="w-full text-xs py-2.5 px-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-caribe-blueAtlantic focus:ring-2 focus:ring-caribe-blueAtlantic/20 outline-none" />
+                                   class="w-full py-3 px-4 rounded-xl bg-slate-900/60 border border-slate-800 text-slate-400 text-xs font-bold cursor-not-allowed" />
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between pt-2">
-                        <div class="flex items-center gap-2 text-xs text-slate-500">
-                            <svg class="w-4 h-4 text-caribe-blueAtlantic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>Te esperamos en Carretera Nacional San Juan Bautista, Sector Carapacho.</span>
-                        </div>
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <span class="text-xs text-slate-400">
+                            📍 Taller en Carretera Nacional San Juan Bautista, Sector Carapacho.
+                        </span>
 
                         <button type="submit" 
-                                class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-caribe-red hover:bg-caribe-darkRed text-white text-xs font-bold shadow-md shadow-caribe-red/20 transition-all cursor-pointer">
-                            <span>Confirmar Cita en Taller</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
+                                class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-caribe-red hover:bg-caribe-darkRed text-white text-xs font-extrabold uppercase tracking-wider shadow-xl shadow-caribe-red/30 transition transform hover:-translate-y-0.5 cursor-pointer">
+                            Confirmar Cita en Taller
                         </button>
                     </div>
+
                 </form>
+
             </div>
 
-            <!-- SECCIÓN: HISTORIAL DE SERVICIOS EN EL RECINTO -->
-            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <!-- SECCIÓN: HISTORIAL DE SERVICIOS PREVIOS -->
+            <div class="bg-[#0A192F] rounded-3xl border border-slate-800 p-8 shadow-xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-white/10">
                     <div>
-                        <h3 class="text-xl font-black text-slate-900 tracking-tight">Historial de Órdenes de Servicio</h3>
-                        <p class="text-xs text-slate-500">Registro histórico de cada intervención realizada en nuestro taller mecánico.</p>
+                        <h3 class="text-xl font-black text-white">Historial de Órdenes de Servicio</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Intervenciones realizadas con repuestos y fluidos certificados.</p>
                     </div>
-                    <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-700 rounded-lg">
-                        Garantía de Servicio Vigente
+                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                        Garantía Caribe Vigente
                     </span>
                 </div>
 
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs">
                         <thead>
-                            <tr class="border-b border-slate-200 text-slate-400 font-bold uppercase tracking-wider text-[10px]">
+                            <tr class="border-b border-slate-800 text-slate-400 font-extrabold uppercase tracking-wider text-[10px]">
                                 <th class="pb-3">Nº Orden</th>
                                 <th class="pb-3">Fecha</th>
-                                <th class="pb-3">Servicio Realizado</th>
+                                <th class="pb-3">Servicio</th>
                                 <th class="pb-3">Kilometraje</th>
-                                <th class="pb-3">Repuestos / Fluidos</th>
+                                <th class="pb-3">Insumos Utilizados</th>
                                 <th class="pb-3 text-right">Estatus</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                        <tbody class="divide-y divide-slate-800/60 font-medium text-slate-300">
                             <tr>
-                                <td class="py-3.5 font-mono font-bold text-slate-900">#ORD-849</td>
-                                <td class="py-3.5 text-slate-500">15/08/2026</td>
-                                <td class="py-3.5 font-bold text-slate-900">Cambio de Aceite 10W-30 & Filtro</td>
-                                <td class="py-3.5">75,000 km</td>
-                                <td class="py-3.5 text-slate-500">Lubricante Semi-Sintético + Filtro Sellado</td>
-                                <td class="py-3.5 text-right">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">
+                                <td class="py-4 font-mono font-bold text-white">#ORD-849</td>
+                                <td class="py-4 text-slate-400">15/08/2026</td>
+                                <td class="py-4 font-bold text-white">Cambio de Aceite 10W-30 & Filtro</td>
+                                <td class="py-4">75,000 km</td>
+                                <td class="py-4 text-slate-400">Motul 4100 + Filtro Sellado</td>
+                                <td class="py-4 text-right">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">
                                         Completado
                                     </span>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="py-3.5 font-mono font-bold text-slate-900">#ORD-792</td>
-                                <td class="py-3.5 text-slate-500">22/04/2026</td>
-                                <td class="py-3.5 font-bold text-slate-900">Escaneo Computarizado & Afinación</td>
-                                <td class="py-3.5">70,200 km</td>
-                                <td class="py-3.5 text-slate-500">Limpieza de inyectores por ultrasonido</td>
-                                <td class="py-3.5 text-right">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">
+                                <td class="py-4 font-mono font-bold text-white">#ORD-792</td>
+                                <td class="py-4 text-slate-400">22/04/2026</td>
+                                <td class="py-4 font-bold text-white">Escaneo Computarizado & Afinación</td>
+                                <td class="py-4">70,200 km</td>
+                                <td class="py-4 text-slate-400">Limpieza por ultrasonido</td>
+                                <td class="py-4 text-right">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">
                                         Completado
                                     </span>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="py-3.5 font-mono font-bold text-slate-900">#ORD-710</td>
-                                <td class="py-3.5 text-slate-500">10/11/2025</td>
-                                <td class="py-3.5 font-bold text-slate-900">Pastillas de Freno Delanteras</td>
-                                <td class="py-3.5">64,500 km</td>
-                                <td class="py-3.5 text-slate-500">Pastillas Cerámicas + Rectificación de Discos</td>
-                                <td class="py-3.5 text-right">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">
+                                <td class="py-4 font-mono font-bold text-white">#ORD-710</td>
+                                <td class="py-4 text-slate-400">10/11/2025</td>
+                                <td class="py-4 font-bold text-white">Pastillas de Freno Delanteras</td>
+                                <td class="py-4">64,500 km</td>
+                                <td class="py-4 text-slate-400">Pastillas Cerámicas + Rectificación</td>
+                                <td class="py-4 text-right">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">
                                         Completado
                                     </span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-
-            <!-- SECCIÓN: NOVEDADES DEL RECINTO Y STOCK -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="p-6 bg-gradient-to-br from-caribe-blueDeep to-caribe-blue rounded-3xl text-white flex flex-col justify-between">
-                    <div>
-                        <span class="px-2.5 py-1 rounded-full bg-white/10 text-white text-[10px] font-bold uppercase tracking-wider">
-                            Stock en Recinto
-                        </span>
-                        <h4 class="text-lg font-black mt-3">Lubricantes Premium Disponibles</h4>
-                        <p class="text-xs text-slate-300 mt-2">
-                            Llegó lote fresco de aceites sintéticos y minerales: Motul, Castrol, Mobil e Inca en todas las viscosidades para tu cambio express.
-                        </p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
-                        <span class="font-bold text-caribe-redLight">Cambio en fosa incluido</span>
-                        <a href="https://www.instagram.com/mscaribeatlantico" target="_blank" class="text-white hover:underline font-semibold">Consultar stock →</a>
-                    </div>
-                </div>
-
-                <div class="p-6 bg-white rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <span class="px-2.5 py-1 rounded-full bg-caribe-redLight text-caribe-red text-[10px] font-bold uppercase tracking-wider">
-                            Servicio Especial
-                        </span>
-                        <h4 class="text-lg font-black text-slate-900 mt-3">Chequeo Integral Pre-Viaje</h4>
-                        <p class="text-xs text-slate-600 mt-2">
-                            ¿Vas a salir de la Isla o recorrer Margarita? Realizamos inspección de 21 puntos vitales: fluidos, frenos, tren delantero y sistema eléctrico.
-                        </p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-                        <span class="font-bold text-caribe-red">En solo 35 minutos</span>
-                        <a href="#agendar-cita" class="text-caribe-blueNavy hover:underline font-bold">Agendar →</a>
-                    </div>
-                </div>
-
-                <div class="p-6 bg-white rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <span class="px-2.5 py-1 rounded-full bg-sky-100 text-caribe-blueAtlantic text-[10px] font-bold uppercase tracking-wider">
-                            Comunidad
-                        </span>
-                        <h4 class="text-lg font-black text-slate-900 mt-3">Síguenos en Instagram</h4>
-                        <p class="text-xs text-slate-600 mt-2">
-                            Conoce trabajos en taller, tips de mantenimiento vehicular y ofertas exclusivas para miembros en <strong>@mscaribeatlantico</strong>.
-                        </p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-                        <span class="font-bold text-slate-700">San Juan Bautista</span>
-                        <a href="https://www.instagram.com/mscaribeatlantico" target="_blank" class="text-caribe-red hover:underline font-bold">Visitar Instagram →</a>
-                    </div>
                 </div>
             </div>
 
