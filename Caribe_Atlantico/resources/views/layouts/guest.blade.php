@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-[#07162C]">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Multiservicios Caribe Atlántico') }}</title>
+
+        <!-- Script de Inicialización Temprana para Evitar Flicker (Default: Dark) -->
+        <script>
+            (function() {
+                var theme = localStorage.getItem('caribe_theme');
+                if (theme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                }
+            })();
+        </script>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -14,16 +28,16 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased text-slate-100 bg-[#07162C] min-h-full flex flex-col justify-between selection:bg-caribe-red selection:text-white">
+    <body class="font-sans antialiased bg-slate-50 text-slate-800 dark:bg-[#07162C] dark:text-slate-100 min-h-full flex flex-col justify-between selection:bg-caribe-red selection:text-white transition-colors duration-200">
         
         <!-- Header con Presencia de Color y Enlace al Portal -->
-        <header class="w-full bg-[#0A192F] border-b border-slate-800 sticky top-0 z-30 shadow-md">
+        <header class="w-full bg-white/95 dark:bg-[#0A192F] border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 shadow-xs dark:shadow-md transition-colors duration-200 backdrop-blur-md">
             <div class="h-1 w-full bg-gradient-to-r from-caribe-red via-caribe-blueAtlantic to-caribe-red"></div>
             <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
                 <a href="{{ url('/') }}" class="flex items-center gap-3.5 group">
                     <img src="{{ asset('images/Logo-Caribe-removebg-preview.png') }}" alt="Logo Caribe Atlántico" class="h-11 w-auto object-contain transition-transform group-hover:scale-105 drop-shadow">
                     <div class="flex flex-col">
-                        <span class="text-sm sm:text-base font-black text-white tracking-tight uppercase group-hover:text-caribe-red transition-colors leading-tight">
+                        <span class="text-sm sm:text-base font-black text-caribe-blue dark:text-white tracking-tight uppercase group-hover:text-caribe-red transition-colors leading-tight">
                             Caribe Atlántico
                         </span>
                         <span class="text-[10px] font-extrabold text-caribe-red uppercase tracking-widest">
@@ -32,21 +46,24 @@
                     </div>
                 </a>
 
-                <a href="{{ url('/') }}" class="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-white transition-colors px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10">
-                    <svg class="w-4 h-4 text-caribe-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    <span>Volver al Portal</span>
-                </a>
+                <div class="flex items-center gap-3">
+                    <x-theme-toggle />
+                    <a href="{{ url('/') }}" class="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-300 dark:text-slate-300 dark:hover:text-white dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 transition-colors px-4 py-2 rounded-xl shadow-2xs">
+                        <svg class="w-4 h-4 text-caribe-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        <span>Volver al Portal</span>
+                    </a>
+                </div>
             </div>
         </header>
 
         <!-- Contenedor Central con Split Layout Profesional y Tonos de Marca -->
         <main class="flex-1 flex items-center justify-center p-6 sm:p-10 lg:p-12">
-            <div class="w-full max-w-4xl bg-gradient-to-br from-[#0A192F] to-[#0D223E] rounded-3xl shadow-2xl border border-slate-700/80 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+            <div class="w-full max-w-4xl bg-white dark:bg-gradient-to-br dark:from-[#0A192F] dark:to-[#0D223E] rounded-3xl shadow-xl dark:shadow-2xl border border-slate-200 dark:border-slate-700/80 overflow-hidden grid grid-cols-1 lg:grid-cols-12 transition-colors duration-200">
                 
                 <!-- Columna Izquierda: Identidad de Marca y Beneficios (Tonos Azul Atlántico + Rojo) -->
-                <div class="lg:col-span-5 bg-gradient-to-br from-[#07162C] via-[#0B2545] to-caribe-blueNavy p-8 sm:p-10 text-white flex flex-col justify-between relative overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-700/80">
+                <div class="lg:col-span-5 bg-gradient-to-br from-[#07162C] via-[#0B2545] to-caribe-blueNavy p-8 sm:p-10 text-white flex flex-col justify-between relative overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-700/80">
                     <!-- Elementos decorativos sutiles -->
                     <div class="absolute -right-16 -top-16 w-56 h-56 bg-caribe-red/25 rounded-full blur-3xl pointer-events-none"></div>
                     <div class="absolute -left-16 -bottom-16 w-56 h-56 bg-caribe-blueAtlantic/30 rounded-full blur-3xl pointer-events-none"></div>
@@ -119,14 +136,14 @@
                 </div>
 
                 <!-- Columna Derecha: Formulario Limpio con Estilo Tecnológico -->
-                <div class="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-center bg-[#0A192F]/60">
+                <div class="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-center bg-white dark:bg-[#0A192F]/60 transition-colors duration-200">
                     {{ $slot }}
                 </div>
             </div>
         </main>
 
         <!-- Footer -->
-        <footer class="w-full py-6 text-center text-xs text-slate-500 bg-[#050E1D] border-t border-slate-800">
+        <footer class="w-full py-6 text-center text-xs text-slate-500 bg-white dark:bg-[#050E1D] border-t border-slate-200 dark:border-slate-800 transition-colors duration-200">
             <p>© {{ date('Y') }} Multiservicios Caribe Atlántico 2022 C.A. • RIF: J-503127830 • San Juan Bautista, Margarita</p>
         </footer>
     </body>
